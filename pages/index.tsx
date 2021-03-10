@@ -3,9 +3,9 @@ import Head from "next/head";
 import { GetStaticProps, GetStaticPropsResult } from "next";
 import { nanoid } from "nanoid";
 import styles from "../styles/Home.module.css";
-import { useImageGallery } from "../components/ImageGallery/useImageGallery";
 import { ImageGalleryItem } from "../components/ImageGallery/types";
 import ImageGallery from "../components/ImageGallery";
+import Slider from "../components/Slider";
 
 const IMAGE_COUNT = 9;
 const IMAGE_HEIGHT = 1200;
@@ -22,6 +22,11 @@ export default function Home(props: PageProps) {
 				<title>React Image Gallery</title>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
+
+			<section>
+				<h1>Slider</h1>
+				<Slider images={props.images} />
+			</section>
 
 			<section>
 				<h1>React Image Gallery compound component</h1>

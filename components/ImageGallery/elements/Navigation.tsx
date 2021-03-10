@@ -4,7 +4,7 @@ export interface NavigationProps {
 
 const Navigation: React.FunctionComponent<NavigationProps> = ({
 	children,
-	className,
+	className = "",
 }) => {
 	return (
 		<nav className={`image-gallery-navigation ${className}`.trim()}>

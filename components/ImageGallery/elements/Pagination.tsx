@@ -4,7 +4,7 @@ export interface PaginationProps {
 
 const Pagination: React.FunctionComponent<PaginationProps> = ({
 	children,
-	className,
+	className = "",
 }) => {
 	return (
 		<nav className={`image-gallery-pagination ${className}`.trim()}>
