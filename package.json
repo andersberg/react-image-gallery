@@ -4,8 +4,8 @@
 	"description": "App and Server for displaying photos.",
 	"private": true,
 	"scripts": {
-		"server:dev": "npm run dev --prefix server",
-		"app:dev": "npm run dev --prefix app"
+		"dev:server": "npm run dev --prefix server",
+		"dev:app": "npm run dev --prefix app"
 	},
 	"repository": {
 		"type": "git",
