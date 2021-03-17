@@ -4,8 +4,13 @@ import env from "env-var";
 import { readFile } from "fs/promises";
 import { resolve, join, extname } from "path";
 import { RequestParams } from "./types";
-import { imageMimeTypes, listDirectories, listFiles } from "./utils";
-
+import {
+	imageMimeTypes,
+	listDirectories,
+	listFiles,
+	ErrorMessageNotFound,
+	ErrorMessageServerError,
+} from "./utils";
 // Setup
 dotenv.config({
 	path: resolve(process.cwd(), "..", ".env"),
@@ -20,10 +25,6 @@ const ENV_PORT = env.get("SERVER_PORT").required().asPortNumber();
 const CWD = process.cwd();
 const ROOT_DIR = resolve(CWD, "..");
 const STATIC_DIR = resolve(ROOT_DIR, ENV_STATIC_DIR);
-
-// Messages
-const ErrorMessageNotFound = "Not Found";
-const ErrorMessageServer = "Server Error";
 
 // Server
 const server = fastify({
@@ -55,7 +56,7 @@ server.get<{ Params: RequestParams }>(
 			if (error.code === "ENOENT") {
 				return response.status(404).send(ErrorMessageNotFound);
 			}
-			return response.status(500).send(ErrorMessageServer);
+			return response.status(500).send(ErrorMessageServerError);
 		}
 	}
 );
@@ -79,7 +80,7 @@ server.get<{ Params: { name: string; image: string } }>(
 			if (error.code === "ENOENT") {
 				return response.status(404).send(ErrorMessageNotFound);
 			}
-			return response.status(500).send(ErrorMessageServer);
+			return response.status(500).send(ErrorMessageServerError);
 		}
 	}
 );
@@ -103,7 +104,7 @@ server.get<{ Params: { name: string } }>(
 			if (error.code === "ENOENT" || error.message === ErrorMessageNotFound) {
 				return response.status(404).send(ErrorMessageNotFound);
 			}
-			return response.status(500).send(ErrorMessageServer);
+			return response.status(500).send(ErrorMessageServerError);
 		}
 	}
 );
@@ -123,7 +124,7 @@ server.get(
 			if (error.code === "ENOENT") {
 				return response.status(404).send(ErrorMessageNotFound);
 			}
-			return response.status(500).send(ErrorMessageServer);
+			return response.status(500).send(ErrorMessageServerError);
 		}
 	}
 );

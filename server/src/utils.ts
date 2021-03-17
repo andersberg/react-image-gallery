@@ -33,6 +33,7 @@ export const mimeTypes: Record<string, string> = {
 	png: "image/png",
 	svg: "image/svg+xml",
 	js: "application/javascript",
+	json: "application/json",
 	default: "text/plain",
 };
 
@@ -43,3 +44,7 @@ export const imageMimeTypes: Record<string, string> = {
 	png: "image/png",
 	default: "image",
 };
+
+// Errors
+export const ErrorMessageNotFound = "Not Found";
+export const ErrorMessageServerError = "Unknown Server Error";
