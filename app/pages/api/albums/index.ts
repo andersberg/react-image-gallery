@@ -22,13 +22,7 @@ export default async function imageHandler(
 	res: NextApiResponse
 ) {
 	try {
-		const { image } = req.query;
-		const imagename = Array.isArray(image) ? image[0] : image;
-		console.log(imagename);
-
-		const endpoint = encodeURI(
-			`${SERVER_URL}:${SERVER_PORT}/${IMAGES_DIR}/${imagename}`
-		);
+		const endpoint = encodeURI(`${SERVER_URL}:${SERVER_PORT}/${IMAGES_DIR}`);
 		const { body, status } = await fetch(endpoint);
 
 		if (status === 200) {

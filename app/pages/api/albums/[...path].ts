@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dotenv from "dotenv";
 import env from "env-var";
-import { resolve } from "path";
+import { extname, resolve } from "path";
 import { mimeTypes } from "../../../utils/utils";
 import {
 	ErrorMessageNotFound,
@@ -21,18 +21,26 @@ export default async function imageHandler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	try {
-		const { image } = req.query;
-		const imagename = Array.isArray(image) ? image[0] : image;
-		console.log(imagename);
+	const { path } = req.query;
+	const filepath = Array.isArray(path) ? path.join("/") : path;
 
+	// path should only be <album name>/<image>
+	if (path.length > 2) {
+		res.setHeader("Content-Type", mimeTypes.txt);
+		return res.status(404).end(ErrorMessageNotFound);
+	}
+
+	try {
 		const endpoint = encodeURI(
-			`${SERVER_URL}:${SERVER_PORT}/${IMAGES_DIR}/${imagename}`
+			`${SERVER_URL}:${SERVER_PORT}/${IMAGES_DIR}/${filepath}`
 		);
+
 		const { body, status } = await fetch(endpoint);
 
+		let type = mimeTypes[extname(endpoint)] ?? mimeTypes.default;
+
 		if (status === 200) {
-			res.setHeader("Content-Type", mimeTypes.json);
+			res.setHeader("Content-Type", type);
 			return res.send(body);
 		}
 

@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "env-var": "^7.0.0",
     "lodash": "^4.17.20",
     "nanoid": "^3.1.18",
     "next": "^10.0.8",
