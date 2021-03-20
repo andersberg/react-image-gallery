@@ -1,28 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import dotenv from "dotenv";
-import env from "env-var";
-import { resolve } from "path";
-import { mimeTypes } from "../../../utils/utils";
+import { mimeTypes } from "../../utils/utils";
 import {
 	ErrorMessageNotFound,
 	ErrorMessageServerError,
-} from "../../../utils/messages";
-// Setup
-dotenv.config({
-	path: resolve(process.cwd(), "..", ".env"),
-});
-
-// Environment Variables
-const IMAGES_DIR = env.get("IMAGES_DIR").required().asString();
-const SERVER_PORT = env.get("SERVER_PORT").required().asPortNumber();
-const SERVER_URL = env.get("SERVER_URL").required().asString();
+} from "../../utils/messages";
+import { IMAGES_DIR, SERVER_URL } from "../../utils/constants";
 
 export default async function imageHandler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
 	try {
-		const endpoint = encodeURI(`${SERVER_URL}:${SERVER_PORT}/${IMAGES_DIR}`);
+		const endpoint = encodeURI(`${SERVER_URL}/${IMAGES_DIR}`);
 		const { body, status } = await fetch(endpoint);
 
 		if (status === 200) {

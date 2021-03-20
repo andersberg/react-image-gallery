@@ -7,15 +7,7 @@ import {
 	ErrorMessageNotFound,
 	ErrorMessageServerError,
 } from "../../../utils/messages";
-// Setup
-dotenv.config({
-	path: resolve(process.cwd(), "..", ".env"),
-});
-
-// Environment Variables
-const IMAGES_DIR = env.get("IMAGES_DIR").required().asString();
-const SERVER_PORT = env.get("SERVER_PORT").required().asPortNumber();
-const SERVER_URL = env.get("SERVER_URL").required().asString();
+import { IMAGES_DIR, SERVER_URL } from "../../../utils/constants";
 
 export default async function imageHandler(
 	req: NextApiRequest,
@@ -31,13 +23,11 @@ export default async function imageHandler(
 	}
 
 	try {
-		const endpoint = encodeURI(
-			`${SERVER_URL}:${SERVER_PORT}/${IMAGES_DIR}/${filepath}`
-		);
+		const endpoint = encodeURI(`${SERVER_URL}/${IMAGES_DIR}/${filepath}`);
 
 		const { body, status } = await fetch(endpoint);
 
-		let type = mimeTypes[extname(endpoint)] ?? mimeTypes.default;
+		let type = mimeTypes[extname(endpoint)] ?? mimeTypes.json;
 
 		if (status === 200) {
 			res.setHeader("Content-Type", type);
