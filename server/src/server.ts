@@ -1,7 +1,7 @@
 import fastify from "fastify";
 import dotenv from "dotenv";
 import env from "env-var";
-import { readFile } from "fs/promises";
+import { readFile } from "fs-extra";
 import { resolve, join, extname } from "path";
 import { RequestParams } from "./types";
 import {
@@ -19,6 +19,7 @@ dotenv.config({
 // Environment Variables
 const ENV_IMAGES_DIR = env.get("IMAGES_DIR").required().asString();
 const ENV_STATIC_DIR = env.get("STATIC_DIR").required().asString();
+const ENV_HOST = env.get("HOST").required().asString();
 const ENV_PORT = env.get("SERVER_PORT").required().asPortNumber();
 
 // Paths
@@ -37,7 +38,9 @@ const server = fastify({
 // Routes
 server.get("/", async (_, response) => {
 	response.header("Content-Type", "text/plain");
-	return response.status(404).send(ErrorMessageNotFound);
+	return response.status(200).send("Hello from Image Gallery Server");
+	// response.header("Content-Type", "text/plain");
+	// return response.status(404).send(ErrorMessageNotFound);
 });
 
 server.get<{ Params: RequestParams }>(
@@ -130,7 +133,7 @@ server.get(
 );
 
 // Initialization
-server.listen(ENV_PORT, (err, address) => {
+server.listen(ENV_PORT, ENV_HOST, (err, address) => {
 	if (err) {
 		console.error(err);
 		process.exit(1);

@@ -2,10 +2,12 @@
 	"name": "image-gallery-server",
 	"version": "0.1.0",
 	"description": "Static image server for image-gallery-app.",
-	"main": "index.ts",
+	"main": "src/server.ts",
 	"scripts": {
-		"watch": "nodemon",
-		"dev": "ts-node src/index.ts"
+		"build": "webpack",
+		"dev": "ts-node src/server.ts",
+		"start": "node dist/server.js",
+		"watch": "nodemon"
 	},
 	"repository": {
 		"type": "git",
@@ -18,16 +20,21 @@
 	},
 	"homepage": "https://github.com/andersberg/react-image-gallery#readme",
 	"devDependencies": {
-		"@tsconfig/node14": "^1.0.0",
-		"@types/node": "^14.14.33",
+		"@tsconfig/node12": "^1.0.7",
+		"@types/fs-extra": "^9.0.8",
+		"@types/node": "<=12.16.3",
 		"nodemon": "^2.0.7",
+		"ts-loader": "^8.0.18",
 		"ts-node": "^9.1.1",
-		"typescript": "^4.2.3"
+		"typescript": "^4.2.3",
+		"webpack": "<=4.44.2",
+		"webpack-cli": "^4.5.0"
 	},
 	"dependencies": {
 		"dotenv": "^8.2.0",
 		"env-var": "^7.0.0",
 		"fastify": "^3.13.0",
+		"fs-extra": "^9.1.0",
 		"pino-pretty": "^4.7.1"
 	}
 }

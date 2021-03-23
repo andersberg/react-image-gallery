@@ -19,6 +19,7 @@
 	"homepage": "https://github.com/andersberg/react-image-gallery#readme",
 	"workspaces": [
 		"app",
+		"common",
 		"server"
 	]
 }

@@ -1,4 +1,4 @@
-import { readdir } from "fs/promises";
+import { readdir } from "fs-extra";
 
 /**
  * List files in a directory.
