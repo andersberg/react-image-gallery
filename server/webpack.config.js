@@ -3,10 +3,14 @@ const path = require("path");
 module.exports = {
 	mode: "production",
 	target: "node",
-	entry: "./src/server.ts",
+	entry: {
+		server: "./src/server.ts",
+		"test-server": "./src/test-server.ts",
+	},
 	output: {
 		path: path.resolve(__dirname, "./dist"),
-		filename: "server.js",
+		// filename: "server.js",
+		filename: "[name].js",
 	},
 	resolve: {
 		extensions: [".ts", ".js"],

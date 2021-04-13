@@ -1,5 +1,8 @@
 # Project
+https
 static/**/*
+utils/**/*
+!utils/**/*.example.sh
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,react,vscode,macos,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,react,vscode,macos,git

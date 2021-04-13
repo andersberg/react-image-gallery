@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/<ZONE ID>/dns_records/<DNS ID>" -H "X-Auth-Email: <Cloudflare Account Email>" -H "X-Auth-Key: <Global API Key>" -H "Content-Type: application/json" --data "{\"id\":\"<ZONE ID>\",\"type\":\"A\",\"name\":\"<subdomain.example.com>\",\"content\":\"`curl https://ifconfig.co`\"}"
