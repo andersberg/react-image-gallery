@@ -38,6 +38,7 @@
 		"fastify-cors": "^5.2.0",
 		"fastify-helmet": "^5.3.1",
 		"fs-extra": "^9.1.0",
+		"image-size": "^1.0.0",
 		"pino-pretty": "^4.7.1"
 	}
 }
