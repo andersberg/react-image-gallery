@@ -2,7 +2,7 @@
 	"watch": ["src"],
 	"ext": ".ts,.js",
 	"ignore": [".git", "node_modules/**/node_modules"],
-	"exec": "ts-node ./src/index.ts",
+	"exec": "npm run compile",
 	"env": {
 		"NODE_ENV": "development"
 	},

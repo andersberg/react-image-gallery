@@ -1,6 +1,7 @@
 import { pathExistsSync, readdirSync } from "fs-extra";
+import sizeOf from "image-size";
 import { extname, join } from "path";
-import { AbsolutePath } from "./types";
+import { AbsolutePath, ImageDimension } from "./types";
 
 /**
  * List files in a directory.
@@ -44,29 +45,16 @@ export function verifyPath(path: AbsolutePath): Boolean {
 	return pathExist;
 }
 
-export const mimeTypes: Record<string, string> = {
-	html: "text/html",
-	txt: "text/plain",
-	css: "text/css",
-	gif: "image/gif",
-	jpg: "image/jpeg",
-	jpeg: "image/jpeg",
-	png: "image/png",
-	svg: "image/svg+xml",
-	js: "application/javascript",
-	json: "application/json",
-	default: "text/plain",
-};
-
-export const imageMimeTypes: Record<string, string> = {
-	gif: "image/gif",
-	jpg: "image/jpeg",
-	jpeg: "image/jpeg",
-	png: "image/png",
-	default: "image",
-};
+export function getDimension(
+	path: AbsolutePath
+): ImageDimension {
+	const image = sizeOf(path);
+	return {
+		width: image?.width,
+		height: image?.height,
+		type: image?.type,
+	};
+}
 
 // Errors
-export const ErrorMessageNotFound = "Not Found";
-export const ErrorMessageServerError = "Unknown Server Error";
 export const ErrorPathDoesNotExist = (path: string) => `${path} does not exist`;
